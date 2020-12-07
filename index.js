@@ -1,10 +1,12 @@
 console.log(localStorage.length);
 let listHTML = "";
 let list = [];
-isEdit : boolean = false ;
+isEdit: boolean = false;
 currentGuid = "";
-document.getElementById("input1").innerHTML = "<input type=text id=input Placeholder='Add a to-do'>" ;
-document.getElementById("button").innerHTML = "<input id=button value=Add onclick=msg()>" ;
+document.getElementById("inputField").innerHTML =
+  "<input type=text id=input Placeholder='Add a to-do'>";
+document.getElementById("button").innerHTML =
+  "<input id=button value=Add onclick=msg()>";
 
 // Nothing to study here. Everytime just have to copy and paste to use it
 
@@ -18,12 +20,21 @@ function CreateGuid() {
 
 for (let i = 0; i < localStorage.length; ++i) {
   list.push({
-      ItemId : localStorage.key(i),
-      item : localStorage.getItem(localStorage.key(i)) 
+    ItemId: localStorage.key(i),
+    item: localStorage.getItem(localStorage.key(i)),
   });
-  listHTML += "<li>" + list[i].item + "<button onclick=clickDone(list['"+i+"'])>Done</button>" + 
-   "<button onclick = deleteItem(list['"+i+"'])>Delete</button> <button onclick = editList(list['"+i+"'])>Edit</button></li>";
-  document.getElementById("products").innerHTML = listHTML;
+  listHTML +=
+    "<li>" +
+    list[i].item +
+    "<button onclick=clickDone(list['" +
+    i +
+    "'])>Done</button>" +
+    "<button onclick = deleteItem(list['" +
+    i +
+    "'])>Delete</button> <button onclick = editList(list['" +
+    i +
+    "'])>Edit</button></li>";
+  document.getElementById("LIST").innerHTML = listHTML;
 }
 console.log(list);
 
@@ -36,20 +47,21 @@ console.log(list);
 //   }
 // }, false);
 
-function clickDone(arg){
-    console.log("click done", arg) ;
+function clickDone(arg) {
+  console.log("click done", arg);
 }
 
 function deleteItem(arg) {
-    console.log("Item deleted", arg) ;
-    localStorage.removeItem(arg.ItemId) ;
-    location.reload() ;
+  console.log("Item deleted", arg);
+  localStorage.removeItem(arg.ItemId);
+  location.reload();
 }
 
 function editList(arg) {
-    document.getElementById("button").innerHTML = "<input id=button value=Update onclick=update()>" ;
-    currentGuid = arg.ItemId ;
-    document.getElementById("input").value = arg.item ;
+  document.getElementById("button").innerHTML =
+    "<input id=button value=Update onclick=update()>";
+  currentGuid = arg.ItemId;
+  document.getElementById("input").value = arg.item;
 }
 
 function msg() {
@@ -60,7 +72,7 @@ function msg() {
 }
 
 function update() {
-    localStorage.setItem(currentGuid, document.getElementById("input").value) ;
-    currentGuid = "" ;
-    location.reload() ; 
+  localStorage.setItem(currentGuid, document.getElementById("input").value);
+  currentGuid = "";
+  location.reload();
 }
